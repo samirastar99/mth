@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/ico" href=" Assets/icons/faviconA.ico" />
+    <link rel="stylesheet " type="text/css " href="Css/style.css " />
+    <link rel="stylesheet " type="text/css " href="Css/todo.css " />
+
+    <!-- Bootstrap AND Font Awesome CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css " rel="stylesheet " integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN " crossorigin="anonymous ">
+    <link rel="stylesheet " href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css " integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm " crossorigin="anonymous ">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.117/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.117/styles/kendo.blueopal.min.css" />
+
+    <!-- KENDO CSS -->
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.117/styles/kendo.rtl.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.117/styles/kendo.silver.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.117/styles/kendo.mobile.all.min.css" />
+    <!--jQuery and other JS libraries-->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.1.117/js/kendo.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+
+    <script src="Js/todo.js"></script>
+
+    <title>Awesome Todo</title>
+</head>
+
+<body>
+    <div id="loader"></div>
+    <nav class="navbar navbar-expand-lg bgColor-main navbar-light ">
+        <a class="navbar-brand nav-link " href="index.html ">Home</a>
+        <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navBarItems " aria-controls="navbarSupportedContent " aria-expanded="false " aria-label="Toggle navigation ">
+                        <span class="navbar-toggler-icon "></span>
+                      </button>
+        <button id="deleteAll" class="btn btn-danger">Delete Storage</button>
+    </nav>
+    <div class="row bg-gray mainDiv ">
+        <div class="col-sm-3 card bg-white padding-all-one padding-left-two ">
+            <div class="small-spacer"></div>
+            <h2>TOTAL LISTS (<span id="totalCount">0</span>)</h2>
+            <div class="small-spacer ">
+            </div>
+            <p class="card-text "><i class="fa fa-exclamation-circle"></i>Categorized By Importance</p>
+            <div class="category padding-left-six ">
+                <p class="small-text link openModal" data-filter="veryhigh" data-category="1" data-toggle="collapse"><i class="fa fa-caret-down"></i>Very High <span class="badge badge-danger badge-pill"><span id="veryHighCount">0</span> items</span>
+                </p>
+
+            </div>
+            <div class="category padding-left-six ">
+                <p class="small-text link openModal" data-filter="high" data-category="1"><i class="fa fa-caret-down"></i>High <span class="badge badge-warning badge-pill"><span id="highCount">0</span> items</span>
+                </p>
+
+            </div>
+            <div class="category padding-left-six ">
+                <p class="small-text link openModal" data-filter="normal" data-category="1"><i class="fa fa-caret-down"></i>Normal <span class="badge badge-primary badge-pill"><span id="normalCount">0</span> items</span>
+                </p>
+            </div>
+            <div class="small-spacer"></div>
+            <p class="card-text "> <i class="fa fa-check-circle"></i>Categorized By Date</p>
+            <div class="category padding-left-six ">
+                <p class="small-text link openModal" data-filter="today" data-category="2"><i class="fa fa-caret-down"></i>Today <span class="badge badge-primary badge-pill"><span id="todayCount">0</span> items</span>
+                </p>
+            </div>
+            <div class="category padding-left-six ">
+                <p class="small-text link openModal" data-filter="thisweek" data-category="2"><i class="fa fa-caret-down"></i>This Week <span class="badge badge-primary badge-pill"><span id="thisWeekCount">0</span> items</span>
+                </p>
+            </div>
+            <div class="category padding-left-six ">
+                <p class="small-text link openModal" data-filter="nextweek" data-category="2"><i class="fa fa-caret-down"></i>Next Week <span class="badge badge-primary badge-pill"><span id="nextWeekCount">0</span> item</span>
+                </p>
+            </div>
+            <div class="category padding-left-six ">
+                <p class="small-text link openModal" data-filter="thismonth" data-category="2"><i class="fa fa-caret-down"></i>This Month <span class="badge badge-primary badge-pill"><span id="thisMonthCount">0</span> Items</span>
+                </p>
+            </div>
+            <div id="searchDiv" class="category">
+                <p class="card-text"><i class="fa fa-search"></i>Custom Search</p>
+                <span>From:</span>
+                <input id="fromDate" value="" title="datepicker" style="width: 100%" />
+                <span>To:</span>
+                <input id="toDate" value="" title="datepicker" style="width: 100%" /><br/>
+                <a class="btn btn-main openModal" data-category="3" data-filter="custom" id="search">Search TODOs Between Dates</a>
+            </div>
+
+        </div>
+        <div class=" col-sm-9 bg-white padding-all-one ">
+            <div class="row">
+                <div class="col-sm-6" id="upper-section">
+                    <h4><i class="fa fa-list-alt"></i> Three Simple Steps</h4>
+                    <div class="small-spacer"></div>
+                    <div>
+                        <strong><i class="fa fa-check"></i>Step 1</strong>: Pick a Date &nbsp;&nbsp;&nbsp;&nbsp; <strong><i class="fa fa-check"></i>Step 2</strong>: Enter ToDo &nbsp; &nbsp;&nbsp;&nbsp; <strong><i class="fa fa-check"></i>Step 3</strong>:
+                        Create
+                    </div>
+                    <div class="small-spacer"></div>
+                    <div id="mainCalendar"></div>
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="spacer"></div>
+                    <div id="todoItem">
+                        <form id="createForm" action="#">
+                            <p for="simple-input"><i class="fa fa-calendar"></i>Date currently selected on the calendar is:&nbsp;<strong id="selectedDate">2/3/2018</strong> </p>
+                            <div class="form-group">
+
+                                <input type="text" name="todoList" class="form-control" id="todoList" aria-describedby="todoList" placeholder="Enter your todo item" required>
+                                <small id="todoList" class="form-text text-muted">For Example , go for grocery shopping, pick up kids...</small>
+                            </div>
+                            <div class="small-spacer"> <i class="fa fa-exclamation-circle"></i>Select Importance</div>
+                            <div class="small-spacer"></div>
+                            <label class="radio-inline very-high-importance">
+                                  <input class="radio" type="radio" name="importance" value="veryHigh">Very High
+                                </label>
+                            <label class="radio-inline high-importance">
+                                  <input class="radio" type="radio" name="importance" value="high">High
+                                </label>
+                            <label class="radio-inline normal-importance">
+                                  <input class="radio" type="radio" name="importance" checked value="normal">Normal
+                                </label>
+                            <div class="small-spacer"></div>
+                            <div class="small-spacer"><button type="submit" id="search" href="#" class="btn btn-main">Create ToDo Item</button></div>
+                        </form>
+                        <div class="small-spacer"></div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="featurette-divider">
+            <div class="small-spacer"></div>
+            <h4><i class="fa fa-angellist"></i>Recent To Do lists</h4>
+            <p class="small-text-gray">Check the item to mark it completed</p>
+            <div id="display-section">
+
+                <div class="row">
+                    <div id="display-todo" class="col-sm-8">
+                        <!--This is where the actual data will go-->
+                        <p id="noItem" class="hide">There are no items in your todo lists.Please create an item.</p>
+
+                        <div class="container" id="recent">
+                            <ul class="list-group">
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="actionAlert" class="alert alert-success alert-dismissible fade hide" role="alert">
+                            <strong>Success!</strong> <span id="alertMessage"></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                      <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!--MODAL CONTENT-->
+    <div class="modal fade" id="toDoModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Todo Lists</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div id="display-todo-modal" class="col-sm-8">
+                            <!--This is where the actual data will go-->
+
+
+                            <div class="container" id="md-todoList">
+                                <span id="categoryAndFilter" data-category="" data-filter=""></span>
+                                <ul class="list-group">
+
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
